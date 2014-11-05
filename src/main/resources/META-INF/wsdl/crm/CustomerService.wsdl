@@ -1,0 +1,166 @@
+<?xml version='1.0' encoding='UTF-8'?><wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://service.customerepo.panks.it/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="CustomerService" targetNamespace="http://service.customerepo.panks.it/">
+  <wsdl:types>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://model.customerepo.panks.it" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://model.customerepo.panks.it">
+  <xsd:complexType name="ArrayOfClientProspet">
+    <xsd:sequence>
+      <xsd:element maxOccurs="unbounded" minOccurs="0" name="ClientProspet" nillable="true" type="tns:ClientProspet"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="ClientProspet">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="denomination" nillable="true" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="fiscalcode" nillable="true" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="id" nillable="true" type="xsd:long"/>
+      <xsd:element minOccurs="0" name="version" nillable="true" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.customerepo.panks.it" attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://service.customerepo.panks.it">
+  <xsd:complexType name="CrmFault">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="code" nillable="true" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="id" type="xsd:int"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:complexType name="CrmException">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="faultInfo" nillable="true" type="tns:CrmFault"/>
+    </xsd:sequence>
+  </xsd:complexType>
+</xsd:schema>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://service.customerepo.panks.it/" xmlns:ns1="http://service.customerepo.panks.it" xmlns:ns0="http://model.customerepo.panks.it" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://service.customerepo.panks.it/">
+  <xsd:import namespace="http://model.customerepo.panks.it"/>
+  <xsd:element name="searchClientProspects" type="tns:searchClientProspects"/>
+  <xsd:complexType name="searchClientProspects">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="name" nillable="true" type="xsd:string"/>
+      <xsd:element minOccurs="0" name="surname" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="searchClientProspectsResponse" type="tns:searchClientProspectsResponse"/>
+  <xsd:complexType name="searchClientProspectsResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="ns0:ArrayOfClientProspet"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="hello" type="tns:hello"/>
+  <xsd:complexType name="hello">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="txt" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="helloResponse" type="tns:helloResponse"/>
+  <xsd:complexType name="helloResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" nillable="true" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="fetchClientProspect" type="tns:fetchClientProspect"/>
+  <xsd:complexType name="fetchClientProspect">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="id" nillable="true" type="xsd:long"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="fetchClientProspectResponse" type="tns:fetchClientProspectResponse"/>
+  <xsd:complexType name="fetchClientProspectResponse">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="return" type="ns0:ClientProspet"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="CrmException" nillable="true" type="ns1:CrmException"/>
+</xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="hello">
+    <wsdl:part element="tns:hello" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchClientProspect">
+    <wsdl:part element="tns:fetchClientProspect" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchClientProspects">
+    <wsdl:part element="tns:searchClientProspects" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="helloResponse">
+    <wsdl:part element="tns:helloResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="fetchClientProspectResponse">
+    <wsdl:part element="tns:fetchClientProspectResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="CrmException">
+    <wsdl:part element="tns:CrmException" name="CrmException">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="searchClientProspectsResponse">
+    <wsdl:part element="tns:searchClientProspectsResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CustomerServicePortType">
+    <wsdl:operation name="searchClientProspects">
+      <wsdl:input message="tns:searchClientProspects" name="searchClientProspects">
+    </wsdl:input>
+      <wsdl:output message="tns:searchClientProspectsResponse" name="searchClientProspectsResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:CrmException" name="CrmException">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <wsdl:input message="tns:hello" name="hello">
+    </wsdl:input>
+      <wsdl:output message="tns:helloResponse" name="helloResponse">
+    </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="fetchClientProspect">
+      <wsdl:input message="tns:fetchClientProspect" name="fetchClientProspect">
+    </wsdl:input>
+      <wsdl:output message="tns:fetchClientProspectResponse" name="fetchClientProspectResponse">
+    </wsdl:output>
+      <wsdl:fault message="tns:CrmException" name="CrmException">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CustomerServiceSoapBinding" type="tns:CustomerServicePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="fetchClientProspect">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="fetchClientProspect">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="fetchClientProspectResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CrmException">
+        <soap:fault name="CrmException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="hello">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="hello">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="helloResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="searchClientProspects">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="searchClientProspects">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchClientProspectsResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="CrmException">
+        <soap:fault name="CrmException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CustomerService">
+    <wsdl:port binding="tns:CustomerServiceSoapBinding" name="CustomerServicePort">
+      <soap:address location="http://localhost:8085/customerepo/services/CustomerService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
