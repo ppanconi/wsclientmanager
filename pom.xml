@@ -11,6 +11,19 @@
         <maven.compiler.target>1.7</maven.compiler.target>
     </properties>
     
+    <dependencies>
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.0.0-RC1</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
     
     <build>
         <plugins>
@@ -21,8 +34,8 @@
                 <executions>
                     <execution>
                         <!--We use a separate execution for each wsdl to have
-                            to use a custom external binding file and wsdlLocation for
-                            runtime jar internal discovery -->
+                        to use a custom external binding file and wsdlLocation for
+                        runtime jar internal discovery -->
                         <id>crm-customerservice</id>
                         <configuration>
                             <!--<wsdlDirectory></wsdlDirectory>-->
@@ -61,14 +74,32 @@
                     </dependency>
                 </dependencies>
             </plugin>
+            
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>schemagen</id>
+                        <goals>
+                            <goal>schemagen</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformSchemas>
+                        <transformSchema>
+                            <uri>http://opclientmanager.org</uri>
+                            <toPrefix>op</toPrefix>
+                            <toFile>schema.xsd</toFile>
+                        </transformSchema>
+                    </transformSchemas>
+                    <includes>
+                        <include>**/XMLConfiguration.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
-    <dependencies>
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.10</version>
-            <scope>test</scope>
-        </dependency>
-    </dependencies>
 </project>

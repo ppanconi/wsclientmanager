@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<ns1:configurations
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xmlns:ns1='http://opclientmanager.org'
+    xsi:schemaLocation='http://opclientmanager.org ../../../target/generated-resources/schemagen/schema.xsd'>
+    
+    <configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="ns1:jaxWsOperationConfiguration">
+        <operationId>fetchClientProspect</operationId>
+        <serviceName xmlns:ns4="http://service.customerepo.panks.it/">ns4:CustomerService</serviceName>
+        <portName xmlns:ns4="http://service.customerepo.panks.it/">ns4:CustomerServicePort</portName>
+        <jaxbContextPackage>it.panks.customerepo.service</jaxbContextPackage>
+        <endpointAddresss>${crm.protocol}://${crm.host}:${crm.port}/customerepo/services/CustomerService</endpointAddresss>
+    </configuration>
+    
+</ns1:configurations>

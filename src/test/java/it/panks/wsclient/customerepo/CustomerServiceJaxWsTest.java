@@ -3,13 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package it.panks.wsclientmanager.crm;
+package it.panks.wsclient.customerepo;
 
 import it.panks.customerepo.model.ClientProspet;
 import it.panks.customerepo.service.CrmException_Exception;
 import it.panks.customerepo.service.CustomerService;
 import it.panks.customerepo.service.CustomerServicePortType;
-import it.panks.wsclient.customerepo.CustomerServiceClient;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,15 +20,13 @@ import static org.junit.Assert.*;
  *
  * @author paolo.panconi
  */
-public class CustomerServiceClientTest {
-    
-    CustomerServiceClient client;
+public class CustomerServiceJaxWsTest {
     
     CustomerService service;
     CustomerServicePortType port;
     
     
-    public CustomerServiceClientTest() {
+    public CustomerServiceJaxWsTest() {
     }
     
     @BeforeClass
@@ -44,8 +41,6 @@ public class CustomerServiceClientTest {
     public void setUp() {
         this.service  = new CustomerService();
         this.port = service.getCustomerServicePort();
-        
-        this.client = new CustomerServiceClient();
     }
     
     @After
@@ -65,12 +60,4 @@ public class CustomerServiceClientTest {
         System.out.println(r.getDenomination());
         assertEquals(r.getDenomination(), "Segone");
     }
-    
-    @Test
-    public void fetct() throws CrmException_Exception {
-        ClientProspet r = client.loadClient(1L);
-        System.out.println(r.getDenomination());
-        assertEquals(r.getDenomination(), "Segone");
-    }
-    
 }
