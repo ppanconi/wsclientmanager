@@ -23,10 +23,6 @@ import javax.xml.bind.Unmarshaller;
  */
 public class XMLFileConfigurationProvider implements ConfigurationProvider {
 
-//    public static final String DEFAULT_XML_CONFIG_FILE_NAME = "opclient-config.xml";
-//    public static final String DEFAULT_POPERTIES_FILE_NAME = "opclient-config.properties";
-//    
-//    public static final String SYSTEM_PROPERTIES_
 //    
     
     private File file;

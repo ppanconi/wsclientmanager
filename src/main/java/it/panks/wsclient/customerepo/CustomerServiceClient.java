@@ -8,6 +8,7 @@ package it.panks.wsclient.customerepo;
 import it.panks.customerepo.model.ClientProspet;
 import it.panks.customerepo.service.FetchClientProspect;
 import it.panks.customerepo.service.FetchClientProspectResponse;
+import it.panks.opclientmanager.client.OperationClientBase;
 import it.panks.opclientmanager.core.OperationDispatcher;
 import it.panks.opclientmanager.core.OperationDispatcherManager;
 
@@ -15,15 +16,16 @@ import it.panks.opclientmanager.core.OperationDispatcherManager;
  *
  * @author paolo.panconi
  */
-public class CustomerServiceClient {
+public class CustomerServiceClient extends OperationClientBase {
 
     public ClientProspet loadClient(Long id) {
 
         FetchClientProspect req = new FetchClientProspect();
         req.setId(id);
         
-        OperationDispatcher dipatcher = OperationDispatcherManager.getInstance().provideDispatcher("fetchClientProspect");
-        FetchClientProspectResponse c = dipatcher.invoke(req, FetchClientProspectResponse.class);
+//        OperationDispatcher dipatcher = OperationDispatcherManager.getInstance().provideDispatcher("fetchClientProspect");
+//        FetchClientProspectResponse c = dipatcher.invoke(req, FetchClientProspectResponse.class);
+            FetchClientProspectResponse c = invokeOperation("fetchClientProspect", req, FetchClientProspectResponse.class);
         
         if (c != null) {
             return c.getReturn();
