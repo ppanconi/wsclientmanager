@@ -59,7 +59,7 @@ public class XMLFileConfigurationProviderTest {
         
         List<BaseOperationConfiguration> result = instance.provideConfigurations();
         JaxWsOperationConfiguration c = (JaxWsOperationConfiguration) result.get(0);
-        assertEquals("http://localhost:8085/customerepo/services/CustomerService", c.getEndpointAddresss());
+        assertEquals("http://localhost:8888/customerepo/services/CustomerService", c.getEndpointAddresss());
     }
     
 }
