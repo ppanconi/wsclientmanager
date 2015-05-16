@@ -63,6 +63,12 @@ public class CustomerServiceClientTest {
     
     @Before
     public void setUp() {
+        stubFor(post(urlEqualTo("/customerepo/services/CustomerService"))
+//            .withHeader("Content-Type", equalTo("text/xml"))
+            .willReturn(aResponse()
+                .withStatus(200)
+                .withHeader("Content-Type", "text/xml;charset=UTF-8")
+                .withBody("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns1:fetchClientProspectResponse xmlns:ns1=\"http://service.customerepo.panks.it/\"><ns1:return><ns2:denomination xmlns:ns2=\"http://model.customerepo.panks.it\">Paul Panks</ns2:denomination><ns2:fiscalcode xmlns:ns2=\"http://model.customerepo.panks.it\">16677399223</ns2:fiscalcode><ns2:id xmlns:ns2=\"http://model.customerepo.panks.it\">1</ns2:id><ns2:version xmlns:ns2=\"http://model.customerepo.panks.it\">2</ns2:version></ns1:return></ns1:fetchClientProspectResponse></soap:Body></soap:Envelope>")));
     }
     
     @After
@@ -75,21 +81,31 @@ public class CustomerServiceClientTest {
     @Test
     public void testLoadClient() {
         System.out.println("loadClient");
-        
-        stubFor(post(urlEqualTo("/customerepo/services/CustomerService"))
-//            .withHeader("Content-Type", equalTo("text/xml"))
-            .willReturn(aResponse()
-                .withStatus(200)
-                .withHeader("Content-Type", "text/xml;charset=UTF-8")
-                .withBody("<soap:Envelope xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\"><soap:Body><ns1:fetchClientProspectResponse xmlns:ns1=\"http://service.customerepo.panks.it/\"><ns1:return><ns2:denomination xmlns:ns2=\"http://model.customerepo.panks.it\">Segone</ns2:denomination><ns2:fiscalcode xmlns:ns2=\"http://model.customerepo.panks.it\">16677399223</ns2:fiscalcode><ns2:id xmlns:ns2=\"http://model.customerepo.panks.it\">1</ns2:id><ns2:version xmlns:ns2=\"http://model.customerepo.panks.it\">2</ns2:version></ns1:return></ns1:fetchClientProspectResponse></soap:Body></soap:Envelope>")));
-        
-        
         Long id = 1L;
         CustomerServiceClient instance = new CustomerServiceClient();
         ClientProspet result = instance.loadClient(id);
         System.out.println(result.getDenomination());
-        assertEquals(result.getDenomination(), "Segone");
+        assertEquals(result.getDenomination(), "Paul Panks");
         
     }
-    
+
+    @Test
+    public void test1000Invoke() {
+        
+        long t1 = System.currentTimeMillis();
+        
+        for (int i = 0; i < 1000; i++) {
+            Long id = 1L;
+            CustomerServiceClient instance = new CustomerServiceClient();
+            ClientProspet result = instance.loadClient(id);
+            System.out.println(result.getDenomination());
+            assertEquals(result.getDenomination(), "Paul Panks");
+     
+        }
+        
+        long t2 = System.currentTimeMillis();
+        
+        System.out.printf("----- :%d \n", t2 - t1);
+        
+    }
 }
