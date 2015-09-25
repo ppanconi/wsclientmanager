@@ -5,9 +5,9 @@ Operation Client Manager Framework. A Framework to manage client invocations on 
 Operation could be remote web service operation, local and remote EJB operation or general object method invocations. 
 
 Relevant features:
-    * Simple configuration, in developing, test and production environments
-    * High performances with local thread safe cached clients artefacts 
-    * High abstraction with simple programmatic model
+* Simple configuration, in developing, test and production environments
+* High performances with local thread safe cached clients artefacts 
+* High abstraction with simple programmatic model
 
 ![Class Diagram](/src/doc/oclientmanager.png)
 
