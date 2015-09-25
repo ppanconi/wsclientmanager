@@ -85,7 +85,7 @@ public class CustomerServiceJaxWsTest {
 
         long t2 = System.currentTimeMillis();
 
-        System.out.printf("----- :%d \n", t2 - t1);
+        System.out.printf("1000 remote invocation with JAX-WS sei client :%d millisec \n", t2 - t1);
 
     }
 

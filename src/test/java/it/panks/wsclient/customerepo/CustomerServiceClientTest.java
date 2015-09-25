@@ -105,7 +105,7 @@ public class CustomerServiceClientTest {
         
         long t2 = System.currentTimeMillis();
         
-        System.out.printf("----- :%d \n", t2 - t1);
+        System.out.printf("1000 remote calls with optclientmanager OperationDispatcher :%d millisecs \n", t2 - t1);
         
     }
 }
