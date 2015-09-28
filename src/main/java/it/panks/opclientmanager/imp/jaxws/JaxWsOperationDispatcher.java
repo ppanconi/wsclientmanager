@@ -6,8 +6,12 @@
 package it.panks.opclientmanager.imp.jaxws;
 
 import it.panks.opclientmanager.core.BaseOperationDispatcher;
+import it.panks.opclientmanager.core.OperationAsyncHandler;
 import it.panks.opclientmanager.core.OperationDispatcher;
+import java.util.concurrent.Future;
+import javax.xml.ws.AsyncHandler;
 import javax.xml.ws.Dispatch;
+import javax.xml.ws.Response;
 
 /**
  *
@@ -27,5 +31,17 @@ public class JaxWsOperationDispatcher extends BaseOperationDispatcher implements
         Object resp = dispatch.invoke(req);
         return responseType.cast(resp);
     }
+    
+    @Override
+    public <T, R> Future<?> invokeAsync(T req, final OperationAsyncHandler<R> handler) {
+       return dispatch.invokeAsync(req, new AsyncHandler<R>() {
+
+           @Override
+           public void handleResponse(Response<R> res) {
+               handler.handleResponse(new JaxWsOperationResponse(res));
+           }
+       });
+    }
+
     
 }
