@@ -8,6 +8,8 @@ Relevant features:
 * Simple configuration, in developing, test and production environments
 * High performances with local thread safe cached clients artefacts 
 * High abstraction with simple programmatic model
+* Synchronous and Asynchronous Payload mep
+* Support for non blocking io 
 
 ![Class Diagram](/src/doc/oclientmanager.png)
 

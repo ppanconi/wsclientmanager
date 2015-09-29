@@ -55,7 +55,7 @@ public class JaxWsDispatcherProvider implements OperationDispatcherProvider {
         try {
             jaxbctx = JAXBContext.newInstance(opConf.getJaxbContextPackage());
         } catch (JAXBException e) {
-            throw new RuntimeException("Error creating JAXB Context for package it.postecom.traspbank.wscontracts", e);
+            throw new RuntimeException("Error creating JAXB Context for package " + opConf.getJaxbContextPackage(), e);
         }
 
         Dispatch<Object> dispatch = service.createDispatch(port, jaxbctx, Service.Mode.PAYLOAD);

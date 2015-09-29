@@ -6,8 +6,10 @@
 package it.panks.opclientmanager.client;
 
 import it.panks.customerepo.service.FetchClientProspectResponse;
+import it.panks.opclientmanager.core.OperationAsyncHandler;
 import it.panks.opclientmanager.core.OperationDispatcher;
 import it.panks.opclientmanager.core.OperationDispatcherManager;
+import java.util.concurrent.Future;
 
 /**
  *
@@ -22,5 +24,11 @@ public abstract class OperationClientBase {
         return c;
     }
     
+    protected <T, R> Future<?> invokeOperationAsync(String operationId, T req, OperationAsyncHandler<R> handler) {
+        
+        OperationDispatcher dipatcher = OperationDispatcherManager.getInstance().provideDispatcher(operationId);
+        Future f = dipatcher.invokeAsync(req, handler);
+        return f;
+    }
     
 }

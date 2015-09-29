@@ -9,8 +9,11 @@ import it.panks.customerepo.model.ClientProspet;
 import it.panks.customerepo.service.FetchClientProspect;
 import it.panks.customerepo.service.FetchClientProspectResponse;
 import it.panks.opclientmanager.client.OperationClientBase;
+import it.panks.opclientmanager.core.OperationAsyncHandler;
 import it.panks.opclientmanager.core.OperationDispatcher;
 import it.panks.opclientmanager.core.OperationDispatcherManager;
+import it.panks.opclientmanager.core.OperationResponse;
+import java.util.concurrent.Future;
 
 /**
  *
@@ -32,6 +35,14 @@ public class CustomerServiceClient extends OperationClientBase {
         } else {
             return null;
         }
-
     }
+    
+    public Future<?> loadClientAsynch(Long id, OperationAsyncHandler<FetchClientProspectResponse> handler) {
+        
+        FetchClientProspect req = new FetchClientProspect();
+        req.setId(id);
+        return invokeOperationAsync("fetchClientProspect", req, handler);
+        
+    }
+    
 }

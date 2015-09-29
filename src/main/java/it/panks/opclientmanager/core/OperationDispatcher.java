@@ -5,6 +5,8 @@
  */
 package it.panks.opclientmanager.core;
 
+import java.util.concurrent.Future;
+
 /**
  *
  * @author paolo.panconi
@@ -14,4 +16,6 @@ public interface OperationDispatcher {
     String getOperationId();
     
     <T, R> R invoke(T req, Class<R> responseType);
+    
+    <T, R> Future<?> invokeAsync(T req, OperationAsyncHandler<R> handler);
 }

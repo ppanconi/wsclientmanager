@@ -25,6 +25,11 @@ import static org.junit.Assert.*;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import com.github.tomakehurst.wiremock.junit.WireMockRule;
+import it.panks.customerepo.service.FetchClientProspectResponse;
+import it.panks.opclientmanager.core.OperationAsyncHandler;
+import it.panks.opclientmanager.core.OperationResponse;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 import org.junit.Rule;
 /**
  *
@@ -87,6 +92,44 @@ public class CustomerServiceClientTest {
         System.out.println(result.getDenomination());
         assertEquals(result.getDenomination(), "Paul Panks");
         
+    }
+    
+    /**
+     * Test of loadClient method, of class CustomerServiceClient.
+     */
+    @Test
+    public void testAsynchLoadClient() {
+        System.out.println("loadClient");
+        Long id = 1L;
+        CustomerServiceClient instance = new CustomerServiceClient();
+        Future result = instance.loadClientAsynch(id, new OperationAsyncHandler<FetchClientProspectResponse>() {
+
+            @Override
+            public void handleResponse(OperationResponse<FetchClientProspectResponse> res) {
+                String denom;
+                try {
+                    denom = res.get().getReturn().getDenomination();
+                    assertEquals(denom, "Paul Panks");
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(CustomerServiceClientTest.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException(ex);
+                } catch (ExecutionException ex) {
+                    Logger.getLogger(CustomerServiceClientTest.class.getName()).log(Level.SEVERE, null, ex);
+                    throw new RuntimeException(ex);
+                }
+                
+        
+            }
+        });
+        while (! result.isDone()) {            
+            try {
+                System.out.println("Waiting...");
+                Thread.sleep(100);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(CustomerServiceClientTest.class.getName()).log(Level.SEVERE, null, ex);
+                throw new RuntimeException(ex);
+            }
+        }
     }
 
     @Test
