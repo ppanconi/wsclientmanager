@@ -41,10 +41,14 @@ public class OperationDispatcherManager implements ConfigurationEventListener {
     }
     
     public OperationDispatcher provideDispatcher(String operationId) {
+        return 
+    }
+    
+    public OperationDispatcher provideDispatcher(String operationId, boolean nocache) {
         
         OperationDispatcher d = null;
         
-        if (getDispatcherCache() != null) {
+        if (! nocache && getDispatcherCache() != null) {
             d = getDispatcherCache().get(operationId);
         }
         
@@ -58,7 +62,7 @@ public class OperationDispatcherManager implements ConfigurationEventListener {
             
             d = conf.getDispatcherProvider().provideDispatcher();
             
-            if (getDispatcherCache() != null) {
+            if (! nocache && getDispatcherCache() != null) {
                 getDispatcherCache().put(operationId, d);
             }
         }

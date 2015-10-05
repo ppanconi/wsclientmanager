@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Properties;
@@ -46,10 +47,10 @@ public class ConfigurationrManager {
     public ConfigurationrManager() {
         
         try {
-            File file = new File(getClass().getResource("/" + DEFAULT_XML_CONFIG_FILE_NAME).getFile());
+            InputStream steam = getClass().getResourceAsStream("/" + DEFAULT_XML_CONFIG_FILE_NAME);
             Properties props = new Properties();
-            props.load(new FileInputStream(new File(getClass().getResource("/" + DEFAULT_GLOBAL_POPERTIES_FILE_NAME).getFile())));
-            XMLFileConfigurationProvider xmlConfProvider = new XMLFileConfigurationProvider(file, props);
+            props.load(getClass().getResourceAsStream("/" + DEFAULT_GLOBAL_POPERTIES_FILE_NAME));
+            XMLFileConfigurationProvider xmlConfProvider = new XMLFileConfigurationProvider(steam, props);
             
             synchConfiguration(xmlConfProvider);
             
