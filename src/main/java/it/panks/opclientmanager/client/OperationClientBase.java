@@ -26,7 +26,7 @@ public abstract class OperationClientBase {
     
     protected <T, R> Future<?> invokeOperationAsync(String operationId, T req, OperationAsyncHandler<R> handler) {
         
-        OperationDispatcher dipatcher = OperationDispatcherManager.getInstance().provideDispatcher(operationId);
+        OperationDispatcher dipatcher = OperationDispatcherManager.getInstance().provideDispatcher(operationId, true);
         Future f = dipatcher.invokeAsync(req, handler);
         return f;
     }
